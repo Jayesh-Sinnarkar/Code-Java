@@ -1,0 +1,17 @@
+ Create multi threaded java application --- having 3 threads
+main , even , odd ,averager
+
+Create EvenPrinterTask , OddPrinterTask ,Average calculator task
+
+Accept from user (in main thread)-- start & end values.
+Pass these values from main to child threads.
+
+Even no printer thread  should print even nos within range, with small delay (sleep=200ms)
+Odd no printer thread should print odd nos within range , with small delay (sleep=250ms)
+Averager thread should compute the average of all the numbers in the range n display it.
+
+
+Ensure no orphans.
+
+Solve above using extends Threads first & then using  implements Runnable scenario.
+(You can try business logic of threads in imperative style manner n later functional style)
