@@ -14,3 +14,4 @@ public class Apple extends Fruit {
 		System.out.println("The name of fruit is " + this.getName() + " Making jam...");
 	}
 }
+//This is comment
