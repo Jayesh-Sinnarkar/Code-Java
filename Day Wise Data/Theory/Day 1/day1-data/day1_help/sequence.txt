@@ -1,0 +1,242 @@
+Quick re cap of some of the earlier important topics
+
+Why Java ?
+Data Types in Java
+
+eg : 
+public interface Printer {
+  //data members : public static final : implicit keywords added by javac
+int DATA=12345;
+//method : public abstract
+ void print(String mesg);
+
+}
+//implementation class
+public class ConsolePrinter implements Printer
+{
+@Override //meant for javac . 
+ public void print(String mesg)
+{
+  s.o.p("printing a mesg "+mesg+" on console.....");
+}
+}
+
+similarly imagine FilePrinter n NetworkPrinter : imple classes of Printer i/f
+
+
+class Tester
+{
+p.s.v.m(...)
+{
+   Printer p;//p => i/f type of ref , 4/8/16 : JVM dependent no of bytes will be mem allocated on main thrd's stack
+ //   p=new Printer();//javac err for R.H.S , since i/f CAN'T be instantiated!!!!
+  p=new ConsolePrinter();//no javac err : upcasting
+// i/f type of the ref. CAN DIRECTLY (w/o type casting) refer to ANY imple. class instance
+  p=new FilePrinter();//no javac err ,BUT how many java objs marked for GC : 1
+  p=new NetworkPrinter();//no javac err ,BUT how many java objs marked for GC : 2
+//in accessible or un reachable objs : FilePrinter n ConsolePrinter objs.
+
+}
+
+Develop menu driven Event Organizer app , to apply inheritance related concepts to a practical scenario.
+required Concepts (encapsulation , inheritance, upcasting , downcasting, toString, array of refs)
+
+Prompt user for max no of participants (Student n Faculty)
+Student : firstName,lastName,marks,course,gradYear
+Faculty :  firstName,lastName, expInYears, sme(Subject matter expertise)
+
+
+Create suitable data structure , to hold participant details.
+sop("Enter max no of participants");
+Person[] participants=new Person[sc.nextInt()];//100
+
+Menu :
+1 : Register Student
+i/p : student details
+
+2. : Register Faculty
+i/p : faculty details
+
+3. Display all participant details 
+for-each
+
+4. : Display specific participant details
+i/p : seat no
+
+5. Invoke participant specific functionality (study or teach)
+i/p : seat no
+
+0. : Exit
+
+
+Annotations in Java
+It is the info.(metadata/tag)  meant for java tools(i.e either javac or JVM)
+eg : @Override
+Method level annotation
+To inform the javac , that following is either overriding form or the implementation form of the method.
+So in case of any mistakes , javac will give you error.
+
+
+
+Important memory areas in JVM 
+stack ,heap , method area
+Are you absolutely clear with 
+method local variables vs instance variables vs static variables ?
+refer to a diagram : "day1-data\day1_help\diagrams\different types of vars.png"
+eg : class Emp
+{
+ id , name , salary , deptId , noOfEmps,idGenerator: int
+public Emp(String name,double sal....)
+{
+  this.name=name; ....
+  this.id=++idGenerator;
+}
+}
+
+What will be the memory pic for the following code?
+eg : Emp e1=new Emp(101,'Rama Mathur',12345);
+Emp e2=e1;
+System.out.println(e1);
+System.out.println(e2);
+e1=null; //Any objects marked for GC ?
+System.out.println(e1.getFirstName());
+System.out.println(e2.getFirstName());
+e2=null; //Any objects marked for GC ?
+
+eg : Consider below code n check if any objects marked for GC ?
+Emp e1=new Emp(101,'Rama Mathur',12345);
+e1=new Emp(102,"Kirat Potdar",34567);
+sop(e1);//it will impliclitly invoke e1.toString() . How ?
+refer : "day1-data\day1_help\diagrams\whiteboard.png"
+
+PENDING 
+eg : What will be mem pic ?
+double[] data;
+data=new double[10];
+
+
+eg : What will be mem pic ?
+Box[] boxes=new Box[2];
+How many objects are created in above statement ?
+
+How will you do this ?
+Customer wants to place the order for no. of boxes n wants to specify the dimensions @ run time , dynamically
+
+
+
+Customer wants to place order for 3 boxes  , with the  dimensions hard coded as :
+10,20,30
+12.5,13.45,20
+1,2,3 
+How will you do this in 1 single java statement ?
+
+static keyword usages
+
+
+Why inheritance ?
+Revise important concepts n keywords , types of inheritance
+
+What about multiple inheritance ?
+
+Can a class implement multiple interfaces ?
+
+What will happen when a class implements 2 interfaces with dup method declaration ? Any ambiguity issue ?
+
+Constructor invocation in the inheritance hierarchy 
+
+Consider Fruits :
+Fruit,Mango,Apple,Orange,Alphonso
+Can you organize them in inheritance hierarchy  ?
+
+Fruit : super class
+public String taste()
+{
+ return "No specific taste";
+}
+
+Mango extends Fruit
+{
+ 
+@Override
+public String taste()
+{
+  return "sweet";
+}
++ additional func
+public void pulp()
+{
+  sop("enjoy cool mango pulp!");
+}
+}
+
+Alphonso extends Mango
+{
+@Override
+public String taste()
+{
+  return "sweet n juicy";
+}
+}
+
+
+Orange extends Fruit
+{
+ @Override
+public String taste()
+{
+  return "sour";
+}
++ additional func
+public void juice()
+{
+  sop("extracting orange juice");
+}
+}
+
+Apple extends Fruit 
+{
+   override : to return"sweet n sour"
+   //jam 
+   public void jam() 
+   {
+      sop("creating apple jam...");
+   }
+}
+
+
+Solve
+What will happen ?
+
+1. Fruit f=new Mango();
+sop(f.taste());
+
+f=new Orange(...);
+sop(f.taste());
+
+
+f=new Alphonso();
+f.taste();
+
+
+2. Object o=f;
+sop(o.taste());
+
+3. Solve :
+
+Fruit f=new Orange();
+f.taste();
+f.juice();
+
+
+f=new Apple();
+f.juice();
+((Orange)f).juice();
+
+
+4. Client wants to create a fruit basket , which can contain apples , oranges , alphonsos .
+How will you do it ?
+
+
+Method overloading vs method overriding 
+Rules pls!
+
